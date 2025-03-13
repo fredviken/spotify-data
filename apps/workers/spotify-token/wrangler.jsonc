@@ -18,14 +18,18 @@
 			"* * * * *"
 		]
 	},
-	"browser": {
-		"binding": "BROWSER"
-	},
 	"kv_namespaces": [
     {
-      "binding": "BROWSER_KV_DEMO",
-			"id": "d99053e8a6984eb2b44d7b2a7f1351b5",
-      "preview_id": "afb590ffa35649ec91a0a1e65101ccd1"
+      "binding": "SPOTIFY_WEB_TOKEN",
+      "id": "5cd2422fd8f3400c948730bb993546d6",
+			"preview_id": "d63f7f5f47e54573b3aa01c9f9929ce1"
+    }
+  ],
+	"workflows": [
+    {
+      "name": "web-token-workflow",
+      "binding": "WEB_TOKEN_WORKFLOW",
+      "class_name": "WebTokenWorkflow"
     }
   ]
 	/**
