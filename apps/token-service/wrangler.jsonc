@@ -9,6 +9,9 @@
 	"compatibility_flags": [
 		"nodejs_compat"
 	],
+	"dev": {
+		"port": 8788
+	},
 	"compatibility_date": "2025-03-12",
 	"observability": {
 		"enabled": true
