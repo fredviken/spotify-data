@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "token-worker",
+	"name": "token-service",
 	"main": "src/index.ts",
 	"compatibility_flags": [
 		"nodejs_compat"
