@@ -1,5 +1,5 @@
 {
-	"name": "window-worker",
+	"name": "streams-processor",
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {

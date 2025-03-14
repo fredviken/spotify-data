@@ -18,11 +18,8 @@ importers:
         specifier: 5.8.2
         version: 5.8.2
 
-  apps/token-worker:
+  apps/streams-processor:
     devDependencies:
-      '@cloudflare/puppeteer':
-        specifier: ^0.0.14
-        version: 0.0.14
       '@cloudflare/workers-types':
         specifier: ^4.20250312.0
         version: 4.20250312.0
@@ -33,8 +30,11 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0(@cloudflare/workers-types@4.20250312.0)
 
-  apps/window-worker:
+  apps/token-service:
     devDependencies:
+      '@cloudflare/puppeteer':
+        specifier: ^0.0.14
+        version: 0.0.14
       '@cloudflare/workers-types':
         specifier: ^4.20250312.0
         version: 4.20250312.0
