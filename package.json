@@ -7,7 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "typegen": "supabase gen types typescript --local > ./packages/database/src/types/database.ts -s public,pgmq,pgmq_public,storage"
+    "typegen": "supabase gen types typescript --local > ./packages/database/src/types/database.ts"
   },
   "devDependencies": {
     "prettier": "^3.5.3",

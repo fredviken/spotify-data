@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  public: {
+  graphql_public: {
     Tables: {
       [_ in never]: never
     }
@@ -15,7 +15,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never
@@ -24,316 +32,235 @@ export type Database = {
       [_ in never]: never
     }
   }
-  storage: {
+  public: {
     Tables: {
-      buckets: {
+      album_artists: {
         Row: {
-          allowed_mime_types: string[] | null
-          avif_autodetection: boolean | null
-          created_at: string | null
-          file_size_limit: number | null
-          id: string
-          name: string
-          owner: string | null
-          owner_id: string | null
-          public: boolean | null
-          updated_at: string | null
+          album_id: string
+          artist_id: string
+          created_at: string
         }
         Insert: {
-          allowed_mime_types?: string[] | null
-          avif_autodetection?: boolean | null
-          created_at?: string | null
-          file_size_limit?: number | null
-          id: string
-          name: string
-          owner?: string | null
-          owner_id?: string | null
-          public?: boolean | null
-          updated_at?: string | null
+          album_id: string
+          artist_id: string
+          created_at?: string
         }
         Update: {
-          allowed_mime_types?: string[] | null
-          avif_autodetection?: boolean | null
-          created_at?: string | null
-          file_size_limit?: number | null
+          album_id?: string
+          artist_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "album_artists_album_id_fkey"
+            columns: ["album_id"]
+            isOneToOne: false
+            referencedRelation: "albums"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "album_artists_artist_id_fkey"
+            columns: ["artist_id"]
+            isOneToOne: false
+            referencedRelation: "artists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      album_tracks: {
+        Row: {
+          album_id: string
+          created_at: string
+          position: number | null
+          track_id: string
+        }
+        Insert: {
+          album_id: string
+          created_at?: string
+          position?: number | null
+          track_id: string
+        }
+        Update: {
+          album_id?: string
+          created_at?: string
+          position?: number | null
+          track_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "album_tracks_album_id_fkey"
+            columns: ["album_id"]
+            isOneToOne: false
+            referencedRelation: "albums"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "album_tracks_track_id_fkey"
+            columns: ["track_id"]
+            isOneToOne: false
+            referencedRelation: "tracks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      albums: {
+        Row: {
+          cover_image: string | null
+          created_at: string
+          id: string
+          name: string
+          release_date: string | null
+          spotify_id: string
+          type: Database["public"]["Enums"]["album_type"] | null
+        }
+        Insert: {
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          release_date?: string | null
+          spotify_id: string
+          type?: Database["public"]["Enums"]["album_type"] | null
+        }
+        Update: {
+          cover_image?: string | null
+          created_at?: string
           id?: string
           name?: string
-          owner?: string | null
-          owner_id?: string | null
-          public?: boolean | null
-          updated_at?: string | null
+          release_date?: string | null
+          spotify_id?: string
+          type?: Database["public"]["Enums"]["album_type"] | null
         }
         Relationships: []
       }
-      migrations: {
+      artists: {
         Row: {
-          executed_at: string | null
-          hash: string
-          id: number
+          avatar_image: string | null
+          created_at: string
+          id: string
           name: string
+          spotify_id: string
         }
         Insert: {
-          executed_at?: string | null
-          hash: string
-          id: number
+          avatar_image?: string | null
+          created_at?: string
+          id?: string
           name: string
+          spotify_id: string
         }
         Update: {
-          executed_at?: string | null
-          hash?: string
-          id?: number
+          avatar_image?: string | null
+          created_at?: string
+          id?: string
           name?: string
+          spotify_id?: string
         }
         Relationships: []
       }
-      objects: {
+      stream_counts: {
         Row: {
-          bucket_id: string | null
-          created_at: string | null
+          created_at: string
+          date: string
           id: string
-          last_accessed_at: string | null
-          metadata: Json | null
-          name: string | null
-          owner: string | null
-          owner_id: string | null
-          path_tokens: string[] | null
-          updated_at: string | null
-          user_metadata: Json | null
-          version: string | null
+          is_missing: boolean
+          missing_reason: string | null
+          streams: number | null
+          track_id: string | null
         }
         Insert: {
-          bucket_id?: string | null
-          created_at?: string | null
+          created_at?: string
+          date: string
           id?: string
-          last_accessed_at?: string | null
-          metadata?: Json | null
-          name?: string | null
-          owner?: string | null
-          owner_id?: string | null
-          path_tokens?: string[] | null
-          updated_at?: string | null
-          user_metadata?: Json | null
-          version?: string | null
+          is_missing?: boolean
+          missing_reason?: string | null
+          streams?: number | null
+          track_id?: string | null
         }
         Update: {
-          bucket_id?: string | null
-          created_at?: string | null
+          created_at?: string
+          date?: string
           id?: string
-          last_accessed_at?: string | null
-          metadata?: Json | null
-          name?: string | null
-          owner?: string | null
-          owner_id?: string | null
-          path_tokens?: string[] | null
-          updated_at?: string | null
-          user_metadata?: Json | null
-          version?: string | null
+          is_missing?: boolean
+          missing_reason?: string | null
+          streams?: number | null
+          track_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "objects_bucketId_fkey"
-            columns: ["bucket_id"]
+            foreignKeyName: "stream_counts_track_id_fkey"
+            columns: ["track_id"]
             isOneToOne: false
-            referencedRelation: "buckets"
+            referencedRelation: "tracks"
             referencedColumns: ["id"]
           },
         ]
       }
-      s3_multipart_uploads: {
+      track_artists: {
         Row: {
-          bucket_id: string
+          artist_id: string
           created_at: string
-          id: string
-          in_progress_size: number
-          key: string
-          owner_id: string | null
-          upload_signature: string
-          user_metadata: Json | null
-          version: string
+          track_id: string
         }
         Insert: {
-          bucket_id: string
+          artist_id: string
           created_at?: string
-          id: string
-          in_progress_size?: number
-          key: string
-          owner_id?: string | null
-          upload_signature: string
-          user_metadata?: Json | null
-          version: string
+          track_id: string
         }
         Update: {
-          bucket_id?: string
+          artist_id?: string
           created_at?: string
-          id?: string
-          in_progress_size?: number
-          key?: string
-          owner_id?: string | null
-          upload_signature?: string
-          user_metadata?: Json | null
-          version?: string
+          track_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "s3_multipart_uploads_bucket_id_fkey"
-            columns: ["bucket_id"]
+            foreignKeyName: "track_artists_artist_id_fkey"
+            columns: ["artist_id"]
             isOneToOne: false
-            referencedRelation: "buckets"
+            referencedRelation: "artists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "track_artists_track_id_fkey"
+            columns: ["track_id"]
+            isOneToOne: false
+            referencedRelation: "tracks"
             referencedColumns: ["id"]
           },
         ]
       }
-      s3_multipart_uploads_parts: {
+      tracks: {
         Row: {
-          bucket_id: string
+          cover_image: string | null
           created_at: string
-          etag: string
           id: string
-          key: string
-          owner_id: string | null
-          part_number: number
-          size: number
-          upload_id: string
-          version: string
+          name: string
+          spotify_id: string
         }
         Insert: {
-          bucket_id: string
+          cover_image?: string | null
           created_at?: string
-          etag: string
           id?: string
-          key: string
-          owner_id?: string | null
-          part_number: number
-          size?: number
-          upload_id: string
-          version: string
+          name: string
+          spotify_id: string
         }
         Update: {
-          bucket_id?: string
+          cover_image?: string | null
           created_at?: string
-          etag?: string
           id?: string
-          key?: string
-          owner_id?: string | null
-          part_number?: number
-          size?: number
-          upload_id?: string
-          version?: string
+          name?: string
+          spotify_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "s3_multipart_uploads_parts_bucket_id_fkey"
-            columns: ["bucket_id"]
-            isOneToOne: false
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "s3_multipart_uploads_parts_upload_id_fkey"
-            columns: ["upload_id"]
-            isOneToOne: false
-            referencedRelation: "s3_multipart_uploads"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      can_insert_object: {
-        Args: {
-          bucketid: string
-          name: string
-          owner: string
-          metadata: Json
-        }
-        Returns: undefined
-      }
-      extension: {
-        Args: {
-          name: string
-        }
-        Returns: string
-      }
-      filename: {
-        Args: {
-          name: string
-        }
-        Returns: string
-      }
-      foldername: {
-        Args: {
-          name: string
-        }
-        Returns: string[]
-      }
-      get_size_by_bucket: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          size: number
-          bucket_id: string
-        }[]
-      }
-      list_multipart_uploads_with_delimiter: {
-        Args: {
-          bucket_id: string
-          prefix_param: string
-          delimiter_param: string
-          max_keys?: number
-          next_key_token?: string
-          next_upload_token?: string
-        }
-        Returns: {
-          key: string
-          id: string
-          created_at: string
-        }[]
-      }
-      list_objects_with_delimiter: {
-        Args: {
-          bucket_id: string
-          prefix_param: string
-          delimiter_param: string
-          max_keys?: number
-          start_after?: string
-          next_token?: string
-        }
-        Returns: {
-          name: string
-          id: string
-          metadata: Json
-          updated_at: string
-        }[]
-      }
-      operation: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
-      search: {
-        Args: {
-          prefix: string
-          bucketname: string
-          limits?: number
-          levels?: number
-          offsets?: number
-          search?: string
-          sortcolumn?: string
-          sortorder?: string
-        }
-        Returns: {
-          name: string
-          id: string
-          updated_at: string
-          created_at: string
-          last_accessed_at: string
-          metadata: Json
-        }[]
-      }
+      [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      album_type: "ALBUM" | "SINGLE" | "COMPILATION"
     }
     CompositeTypes: {
       [_ in never]: never
