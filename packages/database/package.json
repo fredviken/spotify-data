@@ -1,0 +1,17 @@
+{
+  "name": "@spotify-data/database",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "exports": {
+    "./types": {
+      "types": "./src/types/index.ts",
+      "default": "./dist/types/index.js"
+    }
+  },
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}

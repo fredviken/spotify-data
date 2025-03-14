@@ -23,6 +23,12 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20250312.0
         version: 4.20250312.0
+      '@spotify-data/database':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@spotify-data/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       typescript:
         specifier: ^5.5.2
         version: 5.8.2
@@ -38,12 +44,24 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20250312.0
         version: 4.20250312.0
+      '@spotify-data/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       typescript:
         specifier: ^5.5.2
         version: 5.8.2
       wrangler:
         specifier: ^4.0.0
         version: 4.0.0(@cloudflare/workers-types@4.20250312.0)
+
+  packages/database:
+    devDependencies:
+      '@spotify-data/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: latest
+        version: 5.8.2
 
   packages/eslint-config:
     devDependencies:
@@ -81,7 +99,11 @@ importers:
         specifier: ^8.26.0
         version: 8.26.0(eslint@9.22.0)(typescript@5.8.2)
 
-  packages/typescript-config: {}
+  packages/typescript-config:
+    devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.0.0
+        version: 4.20250312.0
 
 packages:
 

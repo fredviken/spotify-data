@@ -6,9 +6,6 @@
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "streams-processor",
 	"main": "src/index.ts",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
 	"dev": {
 		"port": 8787
 	},
