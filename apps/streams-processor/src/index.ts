@@ -1,4 +1,4 @@
-import { type Tables } from '@repo/database'
+import { type Tables } from '@spotify-data/database'
 
 
 export default {
@@ -10,6 +10,7 @@ export default {
 		// 	updatedAt: new Date(),
 		// }
 		// console.log(test)
+		
 		const test: Tables<'albums'> = {
 			id: '1',
 			name: 'test',

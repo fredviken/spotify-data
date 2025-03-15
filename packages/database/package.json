@@ -1,11 +1,14 @@
 {
   "name": "@spotify-data/database",
-  "exports": {
-    ".": "./src/index.ts"
-  },
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
   },
   "devDependencies": {
     "@spotify-data/typescript-config": "workspace:*",
