@@ -1,5 +1,7 @@
 {
-  "name": "@spotify-data/database",
+  "name": "@spotify-data/spotify-client",
+  "version": "0.0.1",
+  "private": true, 
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"
@@ -13,8 +15,5 @@
   "devDependencies": {
     "@spotify-data/typescript-config": "workspace:*",
     "typescript": "latest"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.49.1"
   }
 }

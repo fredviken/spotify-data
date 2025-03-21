@@ -4,41 +4,30 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "token-service",
+	"name": "entity-manager",
 	"main": "src/index.ts",
-	"dev": {
-		"port": 8788,
-		"inspector_port": 9230
-	},
-	"compatibility_date": "2025-03-10",
-	"compatibility_flags": [
-    "nodejs_compat"
-  ],
+	"compatibility_date": "2025-03-13",
 	"observability": {
 		"enabled": true
 	},
-	"triggers": {
-		"crons": [
-			"*/5 * * * *"
-		]
+	"dev": {
+		"port": 8789,
+		"inspector_port": 9231
 	},
-	"browser": {
-		"binding": "MYBROWSER"
-	}
-	// "kv_namespaces": [
-  //   {
-  //     "binding": "SPOTIFY_WEB_TOKEN",
-  //     "id": "5cd2422fd8f3400c948730bb993546d6",
-	// 		"preview_id": "d63f7f5f47e54573b3aa01c9f9929ce1"
-  //   }
-  // ],
-	// "workflows": [
-  //   {
-  //     "name": "web-token-workflow",
-  //     "binding": "WEB_TOKEN_WORKFLOW",
-  //     "class_name": "WebTokenWorkflow"
-  //   }
-  // ]
+	"workflows": [
+		{
+			"name": "new-track",
+			"binding": "NEW_TRACK_WORKFLOW",
+			"class_name": "NewTrackWorkflow"
+		}
+	],
+	"kv_namespaces": [
+    {
+      "binding": "SPOTIFY_WEB_TOKEN",
+      "id": "5cd2422fd8f3400c948730bb993546d6",
+			"preview_id": "d63f7f5f47e54573b3aa01c9f9929ce1"
+    }
+  ]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
